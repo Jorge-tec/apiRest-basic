@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const unirest = require('unirest');
 const bodyparser = require('body-parser');
 require('dotenv').config();
 
@@ -34,6 +34,16 @@ app.get('/', (req, res) => {
         mensaje: 'funciona!'
     });
 });
+
+//ping a la apicoingecko
+app.get('/pingApi', (req, res) => {
+unirest.get('https://api.coingecko.com/api/v3/ping')
+  .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+  .then((response) => {
+    res.json(response.body)
+  })
+});
+
 
 // iniciar server
 const PORT = process.env.PORT || 3001;
