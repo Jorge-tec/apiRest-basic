@@ -27,7 +27,7 @@ const verifyToken = require('./routes/validate-token');
 
 // route middlewares
 app.use('/api/user', authRoutes);
-app.use('/api/dashboard', verifyToken, dashboadRoutes);
+app.use('/api/validateToken', verifyToken, dashboadRoutes);
 
 app.get('/', (req, res) => {
     res.json({

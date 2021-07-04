@@ -67,3 +67,10 @@ Respuesta
     }
 }
 
+========================================
+Config
+========================================
+
+.env.example pasar a .env
+
+configurar conexion a base de datos desde .env a mongodb
