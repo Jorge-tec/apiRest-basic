@@ -1,0 +1,69 @@
+========================================
+/api/user/register -> POST
+========================================
+Postman validacion
+
+Body -> raw 
+
+Content-Type = application/json
+{
+    "name":"",
+    "email":"",
+    "password": ""
+}
+
+Respuesta
+{
+    "error": null,
+    "data": {
+        "_id": "",
+        "name": "",
+        "email": "",
+        "password": "",
+        "date": "",
+        "__v": 
+    }
+}
+========================================
+/api/user/login -> POST
+========================================
+Postman validacion
+
+Body -> raw 
+
+Content-Type = application/json
+{
+    "email":"",
+    "password": ""
+}
+
+Respuesta
+{
+    "error": null,
+    "data": {
+        "token": "Token"
+    }
+}
+========================================
+/api/validarToken -> GET
+========================================
+Postman validacion
+
+Headers
+
+key = auth-token
+Value = "Token"
+
+Respuesta
+{
+    "error": null,
+    "data": {
+        "title": "mi ruta protegida",
+        "user": {
+            "name": "",
+            "id": "",
+            "iat": 
+        }
+    }
+}
+
