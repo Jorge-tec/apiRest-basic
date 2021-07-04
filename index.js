@@ -13,7 +13,6 @@ app.use(bodyparser.json());
 // Conexión a Base de datos
 
 const uri = `mongodb://localhost:27017/${process.env.DBNAME}`;
-//const uri = `mongodb://${process.env.USER}:${process.env.PASSWORD}@localhost:27017/${process.env.DBNAME}?retryWrites=true&w=majority`;
 mongoose.connect(uri,
     { useNewUrlParser: true, useUnifiedTopology: true }
 )

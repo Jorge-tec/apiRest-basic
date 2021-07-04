@@ -7,21 +7,29 @@ const userSchema = mongoose.Schema({
         min: 6,
         max: 255
     },
-    email: {
+    lastname: {
         type: String,
         required: true,
         min: 6,
-        max: 1024
+        max: 255
+    },
+    username: {
+        type: String,
+        required: true,
+        min: 6,
+        max: 255
     },
     password: {
         type: String,
         required: true,
         minlength: 6
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    favorite_currency: {
+        type: String,
+        minlength: 2,
+        max:20
+    },
+
 })
 
 module.exports = mongoose.model('User', userSchema);                               

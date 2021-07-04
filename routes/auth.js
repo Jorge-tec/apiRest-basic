@@ -2,15 +2,16 @@ const router = require('express').Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+
 //contraseña
 const bcrypt = require('bcrypt');
 
 router.post('/register', async (req, res) => {
 
     //validate email
-    const isEmailExist = await User.findOne({ email: req.body.email });
-    if (isEmailExist) {
-        return res.status(400).json({error: 'Email ya registrado'})
+    const isUserNameExist = await User.findOne({ username: req.body.username });
+    if (isUserNameExist) {
+        return res.status(400).json({error: 'El nombre de usuario ya esta registrado'})
     }
 
     // hash contraseña
@@ -19,7 +20,8 @@ router.post('/register', async (req, res) => {
 
     const user = new User({
         name: req.body.name,
-        email: req.body.email,
+        lastname: req.body.lastname,
+        username: req.body.username,
         password: password
     });
 
@@ -36,7 +38,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(400).json({ error: 'Usuario no encontrado' });
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
@@ -44,9 +46,10 @@ router.post('/login', async (req, res) => {
 
     // create token
     const token = jwt.sign({
-        name: user.name,
-        id: user._id
-    }, process.env.TOKEN_SECRET)
+        username: user.username,
+        id: user._id,
+        session_code:Math.random()
+    }, process.env.TOKEN_SECRET,{expiresIn: (process.env.EXPIRE_TOKEN_SESSION * 60)})
     
     res.header('auth-token', token).json({
         error: null,
