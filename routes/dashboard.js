@@ -27,9 +27,12 @@ router.post('/coin',async (req, res) => {
     
     const user = await User.findOne({ _id: req.user.id });
     if (!user) return res.status(400).json({ error: 'Usuario no encontrado' });
-   // const moneda = new Coin(Coins);
+    // const moneda = new Coin(Coins);
 
-   await User.updateOne(
+    var exits  = user.coins.filter(coin => coin.Id_coin === Coins.Id_coin);
+    if (exits.length >= 1) return res.status(400).json({ error: 'La moneda ya esta relacionada al usuario' });
+
+    await User.updateOne(
     {_id: req.user.id}, 
     {$push: {coins: [Coins]}},
     {new: true, upsert: true }).exec();
