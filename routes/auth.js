@@ -22,6 +22,7 @@ router.post('/register', async (req, res) => {
         name: req.body.name,
         lastname: req.body.lastname,
         username: req.body.username,
+        favorite_currency: req.body.favorite_currency,
         password: password
     });
 

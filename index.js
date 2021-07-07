@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const unirest = require('unirest');
 const bodyparser = require('body-parser');
 require('dotenv').config();
 
@@ -23,12 +22,12 @@ mongoose.connect(uri,
 const authRoutes = require('./routes/auth');
 const dashboadRoutes = require('./routes/dashboard');
 const verifyToken = require('./routes/validate-token');
-const endpoint = require('./routes/endpoints');
+/*const endpoint = require('./routes/endpoints');*/
 
 // route middlewares
 app.use('/api/user', authRoutes);
-app.use('/api/validateToken', verifyToken, dashboadRoutes);
-app.use('/api/coin', endpoint);
+app.use('/api/coins', verifyToken, dashboadRoutes);
+
 
 app.get('/', (req, res) => {
     res.json({
@@ -38,13 +37,13 @@ app.get('/', (req, res) => {
 });
 
 //ping a la apicoingecko
-app.get('/pingApi', (req, res) => {
+/*app.get('/pingApi', (req, res) => {
 unirest.get('https://api.coingecko.com/api/v3/ping')
   .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
   .then((response) => {
     res.json(response.body)
   })
-});
+});*/
 
 
 // iniciar server

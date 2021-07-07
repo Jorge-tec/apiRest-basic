@@ -26,9 +26,13 @@ const userSchema = mongoose.Schema({
     },
     favorite_currency: {
         type: String,
+        required: true,
         minlength: 2,
         max:20
     },
+    coins:{
+        type: Array
+    }
 
 })
 
